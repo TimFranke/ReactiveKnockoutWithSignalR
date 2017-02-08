@@ -18,11 +18,13 @@
         </tr>
     </thead>
     <tbody data-bind="foreach: employees">
-        <!-- Here we change the simple binding to make room for 
-            much more complicated binding later on.  We'll create
-            scripts for readonly and edit modes.  One with td tags
-            and the edit mode with input.  We hard code the mode 
-            to edit for now. -->
+        <!-- Here we change the simple binding to make room 
+            for much more complicated binding later on.  
+            We'll create template scripts for readonly and 
+            edit modes.  Readonly mode will have td tags 
+            and the edit mode will have textboxes.  
+            We hard code the template mode to edit-mode for now. 
+         -->
         <tr data-bind="template: { name: 'edit-mode', data: $data }"></tr>
     </tbody>
 </table>
@@ -50,5 +52,6 @@
 
     <!-- change the Employee View Model as you complete each step -->
     <script src="~/App/Step2/EmployeeViewModel.js"></script>
+    <!--               ^^^^^                           -->
 }
 

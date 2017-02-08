@@ -67,9 +67,10 @@ var EmployeeViewModel = function (signalR) {
 
 $(function () {
     // create a variable to point to our signalR Hub.
-    //  The variable "reactive" after connection is
-    // defined by our Hub class.  We have an attribute called
-    //  [HubName("x")] that says what it should be here
+    //  The property "reactive below is actually 
+    //  defined by our Hub class.  
+    //  We have an attribute called [HubName("???")] that says 
+    //  what it should be here  
     var signalR = $.connection.reactive;
 
     //  change your view model and pass signalR into it
@@ -78,6 +79,7 @@ $(function () {
 
     //  we'll use this function to avoid having to 
     //  copy and paste this functionality
+    //  quick findEmployee in the array by ID
     var findEmployee = function (id) {
         return ko.utils.arrayFirst(viewModel.employees(), function (item) {
             if (item.Id == id) {
@@ -88,13 +90,15 @@ $(function () {
 
     //  This is the handler for signalR updateEmployee
     //  this is actually called by our hub class
+    //  We may be the one causing this to happen on other
+    //  browsers, or we may be the one getting called
     signalR.client.updateEmployee = function (id, key, val) {
         var employee = findEmployee(id);
         employee[key](val);
     }
 
     //  Now we call hub.start and when it is up and running
-    //  we go ahead and apply out bindings
+    //  we go ahead and apply our bindings
     $.connection.hub.start().done(function () {
         ko.applyBindings(viewModel);
     });

@@ -2,10 +2,25 @@
 <br />
 <br />
 <h1>Employee System</h1>
+<!-- 
+    Add a div class that shows a animated gif so the user
+    sees that we are loading the data.
+    This data is bound using knockout.js to an observable 
+    property called visible.  
+
+    As soon as the property changes, the image disappears
+-->
 <div class="DataInit" data-bind="visible: loading()">
     <img src="~/Images/loading.gif" alt="Loading Indicator" />
 </div>
 
+<!--
+    Same concept here except the property is bound to 
+    NOT visible.
+
+    As soon as the property changes, the image disappears
+    and the table shows up, now filled with data.
+-->
 <table class="table" data-bind="visible: !loading()">
     <thead>
         <tr>
@@ -17,7 +32,10 @@
             <th>Date Terminated</th>
         </tr>
     </thead>
-
+    <!--
+        This data-bind command basically says 
+        Create a TR for each item in the employees array    
+    -->
     <tbody data-bind="foreach: employees">
         <tr>
             <!-- Here we use a text binding which sets the
@@ -32,6 +50,9 @@
     </tbody>
 </table>
 
+<!--
+    Include Knockout.js and our EmployeeViewModel    
+-->
 @section scripts {
     <script src="~/Scripts/knockout-3.2.0.js"></script>
 

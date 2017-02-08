@@ -15,7 +15,7 @@ var EmployeeViewModel = function (signalR) {
         }
     }
 
-    //  Add a call to lock in signalR
+    //  Add a call to lock the record in signalR
     self.edit = function (employee) {
         employee.IsInEditMode(true);
         signalR.server.lock(employee.Id);
@@ -29,6 +29,11 @@ var EmployeeViewModel = function (signalR) {
 
     // Also add key != IsLocked here 
     // (the locking mechanism will be handled through Hub only)
+    // This seems like something we might want to do at the client 
+    // level only.  However, if someone comes into the session AFTER
+    // someone locks a record, they will never receive the lock command
+    // This could allow a record to show as unlocked, when it should 
+    // be locked.  IsLocked will be a database column for this reason
     self.watchModel = function (model, callback) {
         for (var key in model) {
             if (model.hasOwnProperty(key) &&

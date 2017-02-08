@@ -7,8 +7,8 @@ var EmployeeViewModel = function () {
     self.loading = ko.observable(true);
 
     //  this method goes through each property in the 
-    //  employee and registers a callback for property 
-    //  changes if the key is an observable item.
+    //  employee and registers a callback function for 
+    //  all property changes if the key is an observable item.
     self.watchModel = function (model, callback) {
         for (var key in model) {
             if (model.hasOwnProperty(key) && ko.isObservable(model[key])) {
@@ -27,11 +27,13 @@ var EmployeeViewModel = function () {
 
     $.getJSON("api/employee", function (data) {
         // here we change our employee collection
-        // Adds/Removes are seen by an observableArray
-        // but NOT property changes.
+        // Adds & Removes are seen by an observableArray
+        // but property changes on an individual item are not.
 
         // So we'll add each employee as an object with 
-        // individual observable properties
+        // individual observable properties..that way
+        //  We'll now know when the COLLECTION changes AND
+        //  Each individual property of the Employee object
         self.employees(ko.utils.arrayMap(data, function (employee) {
             var obsEmployee = {
                 Id: employee.Id,
@@ -52,10 +54,13 @@ var EmployeeViewModel = function () {
         self.loading(false);
     });
 
-    //  One of our employees has changed...just one property
-    //  We'll send ID, the property that changed, and new value
+    //  One of our employees has changed...but just one property
+    //  So we'll send the ID, 
+    //                the property that changed, 
+    //                and the new value
     //  into a JSON object and send it to MVC4 Web Api to update
     self.modelChanged = function (model, key, val) {
+        // this is called object literal notation in JavaScript
         var payload = {
             Id: model.Id,
             PropertyName: key,

@@ -174,8 +174,8 @@
     <Content Include="App\Step4\ReadMe.txt" />
     <Content Include="App\Step5\EmployeeViewModel.js" />
     <Content Include="App\Step5\ReadMe.txt" />
-    <Content Include="App\Step5\Step6\EmployeeViewModel.js" />
-    <Content Include="App\Step5\Step6\ReadMe.txt" />
+    <Content Include="App\Step6\EmployeeViewModel.js" />
+    <Content Include="App\Step6\ReadMe.txt" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />

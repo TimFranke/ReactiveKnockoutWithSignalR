@@ -1,9 +1,4 @@
 ﻿<!-- Step 4 HTML Content -->
-<style>
-    .btn {
-        width: 110px;
-    }
-</style>
 <br />
 <br />
 <h1>Employee System</h1>
@@ -23,13 +18,24 @@
             <th>Date Terminated</th>
         </tr>
     </thead>
+    <!--
+        Small change here.  We are not allowing our ViewModel to 
+        specify which template to use.  $root means parent object
+        that we are doing this foreach over (In other words, ViewModel)
+    -->
     <tbody data-bind="foreach: employees">
         <tr data-bind="template: { name: $root.displayMode, data: $data }"></tr>
     </tbody>
 </table>
 
+<!--
+    Add a button to read-only mode which allows folks to LOCK a record.
+    we bind a method in our ViewModel to the click event of this button    
+    In the ViewModel, when you click on this button, it then switched to 
+    EDIT MODE
+-->
 <script type="text/html" id="readonly-mode">
-    <td><a class="btn btn-default" data-bind="click: $root.edit">Edit Employee</a></td>
+    <td><a class="btn btn-default btn-xs" data-bind="click: $root.edit">Edit Employee</a></td>
     <td data-bind="text: Id"></td>
     <td data-bind="text: FirstName"></td>
     <td data-bind="text: LastName"></td>
@@ -38,8 +44,14 @@
     <td data-bind="text: TerminationDate"></td>
 </script>
 
+<!--
+    Add a button to edit-only mode which allows folks to UNLOCK the record.
+    we bind a method in our ViewModel to the click event of this button
+    In the ViewModel, when you click this button, it switches back to 
+    READONLY MODE
+-->
 <script type="text/html" id="edit-mode">
-    <td><a class="btn btn-success" data-bind="click: $root.done">Done Editing</a></td>
+    <td><a class="btn btn-success btn-xs" data-bind="click: $root.done">Done Editing</a></td>
     <td data-bind="text: Id"></td>
     <td><input data-bind="value: FirstName" /></td>
     <td><input data-bind="value: LastName" /></td>

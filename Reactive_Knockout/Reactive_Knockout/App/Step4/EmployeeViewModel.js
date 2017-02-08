@@ -27,6 +27,8 @@ var EmployeeViewModel = function (signalR) {
 
     //  Add key != 'IsInEditMode' so we don't generate 
     //  a WEbAPI call for an internal item
+    //  It is an observable property, but it is meant
+    //  for only client side stuff.
     self.watchModel = function (model, callback) {
         for (var key in model) {
             if (model.hasOwnProperty(key) &&
